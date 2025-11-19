@@ -32,6 +32,16 @@
             background-clip: text;
             margin: -0.2em 0em;
         }
+        .center_text * {
+            font-size: 10em;
+            letter-spacing: -0.03em;   
+            color:transparent;
+            background: linear-gradient(337deg,#b700e1,#ff00b5,#dd0043,#2c0094);
+            background-size: 240% 240%;
+            animation: gradient_animation 18s ease infinite;
+            background-clip: text;
+            margin: -0.2em 0em;
+        }
 
 
         @keyframes gradient_animation {
@@ -98,39 +108,41 @@
                     "font-family: 'Notable'",
                     "font-family: 'Share Tech Mono'"
                 ];
-                let fontstyles2 = [...fontstyles]
-                let fontstyles3 = [...fontstyles]
+                let texts = [
+                    "generic personal website",
+                    "monkey smashing keyboards",
+                    "<a href='https://stuff.msk.wtf'>stuff.msk.wtf</a>"
+                ]
 
                 const fontstylesLen = fontstyles.length;
-                let index = 0;
+                const textLen = texts.length;
+                let indexfs = 0;
+                let indextxt = 0;
                 let text = document.getElementById('text');
-                let text2 = document.getElementById('text2');
-                let text3 = document.getElementById('text3');
-                
-                const changeText = (ele, fs) => {
+                const changeText = (ele, fs, txt) => {
                     //console.log(fontstyles[index])
-                    if (index + 1 === fontstylesLen) {
+                    if (indexfs + 1 === fontstylesLen) {
                         fs = shuffleArray(fs);
-                        index = 0;
-                        ele.setAttribute("style", fs[index]);
-                    } else {
-                        index += 1;
-                        ele.setAttribute("style", fs[index]);   
+                        indexfs = 0;
                     }
+                    if (indextxt + 1 === textLen) {
+                        txt = shuffleArray(txt);
+                        indextxt = 0;
+                    }
+                    ele.setAttribute("style", fs[indexfs]);
+                    ele.innerHTML = txt[indextxt];
+                    indexfs += 1;
+                    indextxt += 1;
                 }
 
                 setInterval(() => {
-                    changeText(text, fontstyles);
-                    changeText(text2, fontstyles2);
-                    changeText(text3, fontstyles3)
+                    changeText(text, fontstyles, texts);
                 }, 50)
             }
         )
     </script>
     <div class="center">
-        <span class="center_text font_change" id="text" style="font-family: 'Roboto Condensed'; font-weight: 100;">monkey</span>
-        <span class="center_text font_change" id="text2" style="font-family: 'Roboto Condensed'; font-weight: 100;">smashing</span>
-        <span class="center_text font_change" id="text3" style="font-family: 'Roboto Condensed'; font-weight: 100;">keyboards</span>
+        <span class="center_text font_change" id="text" style="font-family: 'Roboto Condensed'; font-weight: 100;">monkey smashing keyboards</span>
     </div>
     <div class = "bottom_container">
         <a href="https://github.com/potatolover68">gh</a>
